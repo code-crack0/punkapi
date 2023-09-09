@@ -6,11 +6,13 @@ function App() {
   // Using state to keep record of the search word and the beers fetched from the API
   const [beers, setBeers] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
   // Using useEffect to fetch the beers from the API as soon as the page is loaded and also when the search word changes
   useEffect(() => {
     if (search === "") {
       axios.get("https://api.punkapi.com/v2/beers").then((res) => {
         setBeers(res.data);
+        setLoading(true);
       });
     } else {
       axios
@@ -32,7 +34,7 @@ function App() {
         />
       </form>
       <div className="beers">
-        {beers ? (
+        {loading ? (
           beers.map((beer) => {
             return (
               <div className="card" key={beer.id}>
