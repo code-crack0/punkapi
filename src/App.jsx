@@ -35,15 +35,19 @@ function App() {
       </form>
       <div className="beers">
         {loading ? (
-          beers.map((beer) => {
-            return (
-              <div className="card" key={beer.id}>
-                <h2>{beer.name}</h2>
-                <img src={beer.image_url} alt={beer.name} />
-                <p>{beer.description.slice(0, 200)}</p>
-              </div>
-            );
-          })
+          beers.length > 0 ? (
+            beers.map((beer) => {
+              return (
+                <div className="card" key={beer.id}>
+                  <h2>{beer.name}</h2>
+                  <img src={beer.image_url} alt={beer.name} />
+                  <p>{beer.description.slice(0, 200)}</p>
+                </div>
+              );
+            })
+          ) : (
+            <h3>No Beers Found</h3>
+          )
         ) : (
           <h3>Loading, Please Wait</h3>
         )}
